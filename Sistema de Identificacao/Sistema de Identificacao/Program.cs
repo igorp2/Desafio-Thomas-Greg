@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Sistema_de_Identificacao.Data;
+using Sistema_de_Identificacao.Services;
+using Sistema_de_Identificacao.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<IClienteService, ClienteService>();
 
 var app = builder.Build();
 

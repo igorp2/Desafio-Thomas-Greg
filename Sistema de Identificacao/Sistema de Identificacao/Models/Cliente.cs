@@ -5,7 +5,7 @@
         public int Id { get; set; }
         public string Nome { get; set; } = null!;
         public string Email { get; set; } = null!;
-        public byte[]? Logotipo { get; set; }
+        public string? Logotipo { get; set; }
         public List<Logradouro> Logradouros { get; set; } = new();
     }
 }

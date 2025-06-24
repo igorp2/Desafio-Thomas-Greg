@@ -1,0 +1,90 @@
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.EntityFrameworkCore;
+using Sistema_de_Identificacao.Data;
+using Sistema_de_Identificacao.DTOs;
+using Sistema_de_Identificacao.Models;
+using Sistema_de_Identificacao.Services.Interfaces;
+
+namespace Sistema_de_Identificacao.Services
+{
+    public class ClienteService : IClienteService
+    {
+        private readonly AppDbContext _context;
+
+        public ClienteService(AppDbContext context)
+        {
+            _context = context;
+        }
+
+        public async Task<List<Cliente>> ObterTodos()
+        {
+            var clientes = await _context.Clientes
+                .Include(c => c.Logradouros)
+                .ToListAsync();
+
+            return clientes;
+        }
+
+        public async Task<Cliente?> ObterPorId(int id)
+        {
+            var cliente = await _context.Clientes
+                .Include(c => c.Logradouros)
+                .FirstOrDefaultAsync(c => c.Id == id);
+
+            return cliente;
+        }
+
+        public async Task Criar(ClienteCreateDto dto)
+        {
+            bool existeEmail = await _context.Clientes.AnyAsync(c => c.Email == dto.Email);
+
+            if (existeEmail) throw new ArgumentException("Já existe um cliente cadastrado com este e-mail.");
+            
+            //Aqui seria onde a imagem seria salva em algum servidor em nuvem, seria gerado e salvo a url de acesso
+
+            var cliente = new Cliente
+            {
+                Nome = dto.Nome,
+                Email = dto.Email,
+                Logotipo = dto.Logotipo,
+                Logradouros = dto.Logradouros.Select(l => new Logradouro
+                {
+                    Rua = l.Rua
+                }).ToList()
+            };
+
+            _context.Clientes.Add(cliente);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<bool> Atualizar(int id, ClienteUpdateDto dto)
+        {
+            var cliente = await _context.Clientes.FindAsync(id);
+            if (cliente == null) return false;
+
+            // Verificar depois a atualização de logradouros....
+
+            cliente.Nome = dto.Nome;
+            cliente.Email = dto.Email;
+            cliente.Logotipo = dto.Logotipo;
+            cliente.Logradouros = dto.Logradouros.Select(l => new Logradouro
+            {
+                Rua = l.Rua
+            }).ToList();
+
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<bool> Remover(int id)
+        {
+            var cliente = await _context.Clientes.FindAsync(id);
+            if(cliente == null) return false;
+
+            _context.Clientes.Remove(cliente);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+      
+    }
+}

@@ -12,11 +12,15 @@ namespace Sistema_de_Identificacao.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Cliente>().HasIndex(c => c.Email).IsUnique();
+            modelBuilder.Entity<Cliente>()
+                .HasIndex(c => c.Email)
+                .IsUnique();
+
             modelBuilder.Entity<Cliente>()
                 .HasMany(c => c.Logradouros)
-                .WithOne()
-                .HasForeignKey(l => l.ClienteId);
+                .WithOne(l => l.Cliente)
+                .HasForeignKey(l => l.ClienteId)
+                .OnDelete(DeleteBehavior.Cascade);
         } 
     }
 }
