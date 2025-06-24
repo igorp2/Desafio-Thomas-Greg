@@ -1,0 +1,6 @@
+@Sistema_de_Identificacao_HostAddress = http://localhost:5287
+
+GET {{Sistema_de_Identificacao_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

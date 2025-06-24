@@ -1,0 +1,84 @@
+## Compilação
+bin/
+obj/
+*.exe
+*.dll
+*.pdb
+*.cache
+*.log
+
+## Visual Studio
+.vscode/
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Build Results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Bb]uild/
+
+## Arquivos temporários
+*.tmp
+*.temp
+*.bak
+*.old
+*.orig
+*.log
+*.sdf
+*.dbmdl
+*.scc
+
+## Arquivos de publicação
+publish/
+wwwroot/**/*.map
+
+## Arquivos do Rider
+.idea/
+*.sln.iml
+
+## User secrets
+**/secrets.json
+*.userprefs
+
+## Configuração do sistema operacional
+.DS_Store
+Thumbs.db
+
+## Pacotes e dependências
+*.nupkg
+packages/
+project.lock.json
+project.fragment.lock.json
+
+# Pacotes NuGet
+*.snupkg
+*.nuspec
+
+# Cache global do NuGet
+~/.nuget/
+
+# Logs
+*.log
+
+# Entity Framework Migrations
+Migrations/
+
+# Testes
+TestResults/
+coverage/
+*.coverage
+*.coveragexml
+
+# Arquivos do ReSharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+
+# Arquivos do Azure Functions
+local.settings.json
+host.json
