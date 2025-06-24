@@ -64,6 +64,10 @@ namespace Sistema_de_Identificacao.Services
 
             // Verificar depois a atualização de logradouros....
 
+            bool existeEmail = await _context.Clientes.AnyAsync(c => c.Email == dto.Email);
+
+            if (existeEmail) throw new ArgumentException("Já existe um cliente cadastrado com este e-mail.");
+
             cliente.Nome = dto.Nome;
             cliente.Email = dto.Email;
             cliente.Logotipo = dto.Logotipo;

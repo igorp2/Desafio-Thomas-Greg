@@ -8,7 +8,7 @@ namespace Sistema_de_Identificacao.Services.Interfaces
     {
         Task<List<Cliente>> ObterTodos();
         Task<Cliente?> ObterPorId(int id);
-        Task Criar(ClienteCreateDto clienteCreateDto);
+        Task Criar(ClienteCreateDto dto);
         Task<bool> Atualizar(int id, ClienteUpdateDto dto);
         Task<bool> Remover(int id);
     }

@@ -6,8 +6,8 @@
 
         public string Email { get; set; }
 
-        public string? Logotipo { get; set; }
+        public string Logotipo { get; set; }
 
-        public List<LogradouroCreateDto> Logradouros { get; set; } = new();
+        public List<LogradouroClienteDto> Logradouros { get; set; } = new();
     }
 }

@@ -15,16 +15,6 @@ namespace Sistema_de_Identificacao.Controllers
             _clienteService = clienteService;
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
-        {
-            var cliente = await _clienteService.ObterPorId(id);
-
-            if (cliente == null) return NotFound("Cliente não encontrado!");
-
-            return Ok(cliente);
-        }
-
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -33,6 +23,16 @@ namespace Sistema_de_Identificacao.Controllers
             if (clientes.Count == 0) return Ok("Nenhum cliente cadastrado!");
 
             return Ok(clientes);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var cliente = await _clienteService.ObterPorId(id);
+
+            if (cliente == null) return NotFound("Cliente não encontrado!");
+
+            return Ok(cliente);
         }
 
         [HttpPost]
@@ -50,10 +50,17 @@ namespace Sistema_de_Identificacao.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] ClienteUpdateDto dto)
+        public async Task<IActionResult> Update(int id, [FromBody] ClienteUpdateDto dto)
         {
-            var atualizado = await _clienteService.Atualizar(id, dto);
-            return atualizado ? Ok("Cliente atualizado com sucesso.") : NotFound("Cliente não encontrado.");
+            try
+            {
+                var atualizado = await _clienteService.Atualizar(id, dto);
+                return atualizado ? Ok("Cliente atualizado com sucesso.") : NotFound("Cliente não encontrado.");
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpDelete("id")]
