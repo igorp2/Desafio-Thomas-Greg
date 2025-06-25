@@ -9,6 +9,8 @@ namespace Sistema_de_Identificacao.Data
 
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Logradouro> Logradouros { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

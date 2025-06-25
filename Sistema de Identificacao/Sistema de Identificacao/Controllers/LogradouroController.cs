@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Sistema_de_Identificacao.DTOs;
 using Sistema_de_Identificacao.Models;
 using Sistema_de_Identificacao.Services.Interfaces;
@@ -7,6 +8,7 @@ namespace Sistema_de_Identificacao.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class LogradouroController : ControllerBase
     {
         private readonly ILogradouroService _logradouroService;
