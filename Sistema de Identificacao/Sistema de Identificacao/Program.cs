@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore;
+Ôªøusing Microsoft.EntityFrameworkCore;
 using Sistema_de_Identificacao.Data;
 using Sistema_de_Identificacao.Services;
 using Sistema_de_Identificacao.Services.Interfaces;
@@ -46,6 +46,14 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+// Carregar arquivo com a Key do JWT, isolada por serguran√ßa
+builder.Configuration
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true)
+    .AddJsonFile("appsettings.Secret.json", optional: true, reloadOnChange: true)
+    .AddEnvironmentVariables();
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -72,7 +80,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
                 var result = System.Text.Json.JsonSerializer.Serialize(new
                 {
-                    erro = "VocÍ n„o est· autorizado. Token inv·lido ou ausente."
+                    erro = "Voc√™ n√£o est√° autorizado. Token inv√°lido ou ausente."
                 });
 
                 return context.Response.WriteAsync(result);

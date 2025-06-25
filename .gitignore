@@ -79,3 +79,6 @@ _ReSharper*/
 # Arquivos do Azure Functions
 local.settings.json
 host.json
+
+# Variável key do JWT
+appsettings.Secret.json
