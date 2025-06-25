@@ -47,7 +47,7 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Carregar arquivo com a Key do JWT, isolada por segurança
+// Carregar arquivo com a Key do JWT e dados do Admin Default, isolados por segurança
 builder.Configuration
     .SetBasePath(Directory.GetCurrentDirectory())
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)

@@ -106,13 +106,21 @@ git clone https://github.com/igorp2/Desafio-Thomas-Greg.git
 cd '.\Sistema de Identificacao\'
 ```
 
-### 2. Baixe o arquivo `appsettings.Secret.json`
+### 2. Branch do projeto
+
+Certifique-se de estar na branch `main` executando:
+
+```bash
+git checkout main
+```
+
+### 3. Baixe o arquivo `appsettings.Secret.json`
 
 Acesse o [link](https://drive.google.com/file/d/1Mn1RB9P-NBkEz2Yv3nXnUV9ftDVgpkqi/view?usp=sharing) e coloque o arquivo `appsettings.Secret.json` na pasta do projeto juntamente com os demais `appsettings` já presentes. Lá está presente os dados de login do Admin Default que é gerado ao iniciar o projeto por não ter nenhum usuário cadastrado e facilitar a utilização do sistema.
 
 >Atenção: se esse arquivo não estiver presente, o projeto não irá compilar!
 
-### 3. Configure o banco de dados
+### 4. Configure o banco de dados
 
 No arquivo `appsettings.json`, ajuste as configurações do banco de dados para o seu ambiente. Para meu ambiente de desenvolvimento utilizei a seguinte `ConnectionString`:
 
@@ -124,14 +132,14 @@ No arquivo `appsettings.json`, ajuste as configurações do banco de dados para 
 
 Para ambientes de produção, é importante revisar opções como autenticação, certificados e segurança da conexão.
 
-### 4. Execute as migrações e inicie o projeto
+### 5. Execute as migrações e inicie o projeto
 
 ```bash
 dotnet ef database update
 dotnet run
 ```
 
-### 5. Acesse o sistema
+### 6. Acesse o sistema
 
 
 Realize login via `/api/auth/login` e receba um token JWT.
