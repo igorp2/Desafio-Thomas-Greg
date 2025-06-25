@@ -15,8 +15,8 @@ namespace Sistema_de_Identificacao.Data
             // Verifica se já existe algum usuário
             if (!await context.Usuarios.AnyAsync())
             {
-                var email = config["AdminSeed:Email"];
-                var senha = config["AdminSeed:Senha"];
+                var email = config["AdminDados:Email"];
+                var senha = config["AdminDados:Senha"];
 
                 var admin = new Usuario
                 {

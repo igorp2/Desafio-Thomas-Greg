@@ -13,7 +13,6 @@ namespace Sistema_de_Identificacao.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-
     public class AutenticacaoController : ControllerBase
     {
         private readonly AppDbContext _context;

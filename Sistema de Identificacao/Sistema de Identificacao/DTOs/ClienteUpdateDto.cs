@@ -2,24 +2,8 @@
 
 namespace Sistema_de_Identificacao.DTOs
 {
-    public class ClienteUpdateDto
+    public class ClienteUpdateDto : ClienteCreateDto
     {
-        public int Id { get; set; }
-
-        [Required]
-        [StringLength(100)]
-        public string Nome { get; set; } = null!;
-
-        [Required]
-        [StringLength(150)]
-        [EmailAddress(ErrorMessage = "Informe um e-mail válido.")]
-        public string Email { get; set; } = null!;
-
-        [Required]
-        [StringLength(500)]
-        public string Logotipo { get; set; } = null!;
-
-        [MinLength(1, ErrorMessage = "Informe ao menos um logradouro.")]
-        public List<LogradouroClienteDto> Logradouros { get; set; } = [];
+        public int Id { get; set; }        
     }
 }

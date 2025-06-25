@@ -11,7 +11,6 @@ namespace Sistema_de_Identificacao.Data
         public DbSet<Logradouro> Logradouros { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
 
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Cliente>()

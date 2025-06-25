@@ -112,7 +112,6 @@ namespace Sistema_de_Identificacao.Services
             _context.Clientes.Remove(cliente);
             await _context.SaveChangesAsync();
             return true;
-        }
-      
+        }      
     }
 }
