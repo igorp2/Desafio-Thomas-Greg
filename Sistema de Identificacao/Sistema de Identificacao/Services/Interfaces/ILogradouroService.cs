@@ -7,6 +7,7 @@ namespace Sistema_de_Identificacao.Services.Interfaces
     {
         Task<List<Logradouro>> ObterTodos();
         Task<Logradouro?> ObterPorId(int id);
+        Task<List<Logradouro>?> ObterPorClienteId(int clienteId);
         Task Criar(LogradouroCreateDto dto);
         Task<bool> Atualizar(LogradouroUpdateDto dto);
         Task<bool> Remover(int id);

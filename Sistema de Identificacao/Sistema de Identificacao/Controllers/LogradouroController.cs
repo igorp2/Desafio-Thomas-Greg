@@ -38,6 +38,17 @@ namespace Sistema_de_Identificacao.Controllers
             return Ok(logradouro);
         }
 
+        [HttpGet("ClienteId")]
+        public async Task<IActionResult> GetByClienteId(int clienteId)
+        {
+            var logradouro = await _logradouroService.ObterPorClienteId(clienteId);
+
+            if (logradouro == null)
+                return NotFound("Cliente não encontrado!");
+
+            return Ok(logradouro);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Create(LogradouroCreateDto logradouroDto)
         {

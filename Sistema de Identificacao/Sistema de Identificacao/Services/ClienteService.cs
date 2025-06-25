@@ -51,7 +51,12 @@ namespace Sistema_de_Identificacao.Services
                 Logotipo = dto.Logotipo,
                 Logradouros = dto.Logradouros.Select(l => new Logradouro
                 {
-                    Rua = l.Rua
+                    Rua = l.Rua,
+                    Numero = l.Numero,
+                    Bairro = l.Bairro,
+                    Cidade = l.Cidade,
+                    Estado = l.Estado,
+                    Cep = l.Cep
                 }).ToList()
             };
 
@@ -77,7 +82,12 @@ namespace Sistema_de_Identificacao.Services
             cliente.Logotipo = dto.Logotipo;
             cliente.Logradouros = dto.Logradouros.Select(l => new Logradouro
             {
-                Rua = l.Rua
+                Rua = l.Rua,
+                Numero = l.Numero,
+                Bairro = l.Bairro,
+                Cidade = l.Cidade,
+                Estado = l.Estado,
+                Cep = l.Cep
             }).ToList();
 
             await _context.SaveChangesAsync();

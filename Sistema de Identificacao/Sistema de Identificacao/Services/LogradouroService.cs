@@ -3,6 +3,7 @@ using Sistema_de_Identificacao.Data;
 using Sistema_de_Identificacao.DTOs;
 using Sistema_de_Identificacao.Models;
 using Sistema_de_Identificacao.Services.Interfaces;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Sistema_de_Identificacao.Services
 {
@@ -29,6 +30,19 @@ namespace Sistema_de_Identificacao.Services
             return logradouro;
         }
 
+        public async Task<List<Logradouro>?> ObterPorClienteId(int clienteId)
+        {
+            var cliente = await _context.Clientes.FindAsync(clienteId);
+            if (cliente == null)
+                return null;
+
+            var logradouros = await _context.Logradouros
+                .Where(l => l.ClienteId == clienteId)
+                .ToListAsync();
+
+            return logradouros;
+        }
+
         public async Task Criar(LogradouroCreateDto dto)
         {
             bool existeCliente = await _context.Clientes.AnyAsync(c => c.Id == dto.ClienteId);
@@ -38,6 +52,11 @@ namespace Sistema_de_Identificacao.Services
             var logradouro = new Logradouro
             {
                 Rua = dto.Rua,
+                Numero = dto.Numero,
+                Bairro = dto.Bairro,
+                Cidade = dto.Cidade,
+                Estado = dto.Estado,
+                Cep = dto.Cep,
                 ClienteId = dto.ClienteId
             };
 
@@ -48,10 +67,15 @@ namespace Sistema_de_Identificacao.Services
         public async Task<bool> Atualizar(LogradouroUpdateDto dto)
         {
             var logradouro = await _context.Logradouros.FindAsync(dto.Id); ;
-            if (logradouro == null) 
+            if (logradouro == null)
                 return false;
 
             logradouro.Rua = dto.Rua;
+            logradouro.Numero = dto.Numero;
+            logradouro.Bairro = dto.Bairro;
+            logradouro.Cidade = dto.Cidade;
+            logradouro.Estado = dto.Estado;
+            logradouro.Cep = dto.Cep;
             logradouro.ClienteId = dto.ClienteId;
 
             await _context.SaveChangesAsync();
