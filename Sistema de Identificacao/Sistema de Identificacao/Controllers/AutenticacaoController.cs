@@ -36,7 +36,7 @@ namespace Sistema_de_Identificacao.Controllers
             {
                 Nome = dto.Nome,
                 Email = dto.Email,
-                PasswordHash = HashPassword(dto.Password),
+                PasswordHash = GerarHash(dto.Senha),
                 Cargo = dto.Cargo
             };
 
@@ -50,16 +50,16 @@ namespace Sistema_de_Identificacao.Controllers
         public async Task<IActionResult> Login(LoginDto dto)
         {
             var user = await _context.Usuarios.FirstOrDefaultAsync(u => u.Email == dto.Email);
-            if (user == null || user.PasswordHash != HashPassword(dto.Password))
+            if (user == null || user.PasswordHash != GerarHash(dto.Senha))
                 return Unauthorized("Email ou senha inválidos.");
 
             var token = _tokenService.GenerateToken(user);
             return Ok(new { token });
         }
 
-        private static string HashPassword(string password)
+        private static string GerarHash(string senha)
         {
-            var bytes = Encoding.UTF8.GetBytes(password);
+            var bytes = Encoding.UTF8.GetBytes(senha);
             var hash = SHA256.HashData(bytes);
             return Convert.ToBase64String(hash);
         }

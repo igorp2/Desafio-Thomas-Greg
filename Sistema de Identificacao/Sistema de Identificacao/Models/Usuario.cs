@@ -13,7 +13,6 @@ namespace Sistema_de_Identificacao.Models
         public string Email { get; set; } = null!;
         public string PasswordHash { get; set; } = null!;
         public CargoUsuario Cargo { get; set; } = CargoUsuario.Comum;
-
     }
     public enum CargoUsuario
     {

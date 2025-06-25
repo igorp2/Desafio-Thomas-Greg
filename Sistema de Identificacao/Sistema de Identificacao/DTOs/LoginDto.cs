@@ -10,7 +10,7 @@ namespace Sistema_de_Identificacao.DTOs
         public string Email { get; set; } = null!;
 
         [Required]
-        public string Password { get; set; } = null!;
+        public string Senha { get; set; } = null!;
 
     }
 }

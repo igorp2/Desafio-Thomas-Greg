@@ -14,7 +14,7 @@ namespace Sistema_de_Identificacao.DTOs
         [EmailAddress(ErrorMessage = "Informe um e-mail válido.")]
         public string Email { get; set; } = null!;
 
-        public string Password { get; set; } = null!;
+        public string Senha { get; set; } = null!;
         public CargoUsuario Cargo { get; set; } = CargoUsuario.Comum;
     }
 }

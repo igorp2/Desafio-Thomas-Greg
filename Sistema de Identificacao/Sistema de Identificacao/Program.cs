@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text.Json;
+using Sistema_de_Identificacao.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -46,13 +47,14 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Carregar arquivo com a Key do JWT, isolada por sergurança
+// Carregar arquivo com a Key do JWT, isolada por segurança
 builder.Configuration
     .SetBasePath(Directory.GetCurrentDirectory())
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
     .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true)
     .AddJsonFile("appsettings.Secret.json", optional: true, reloadOnChange: true)
     .AddEnvironmentVariables();
+
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -103,6 +105,9 @@ builder.Services.AddScoped<ILogradouroService, LogradouroService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 
 var app = builder.Build();
+
+//Gerar um user admin default ao iniciar a aplicação com banco vazio
+await DbInitializer.CriarAdminPadraoAsync(app.Services, builder.Configuration);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
