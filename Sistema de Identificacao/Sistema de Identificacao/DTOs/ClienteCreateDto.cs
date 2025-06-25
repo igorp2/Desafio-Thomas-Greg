@@ -1,4 +1,5 @@
 ﻿using Sistema_de_Identificacao.Models;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace Sistema_de_Identificacao.DTOs
@@ -16,6 +17,7 @@ namespace Sistema_de_Identificacao.DTOs
 
         [Required]
         [StringLength(500)]
+        [DefaultValue("https://servidornuvem.com/logo.png")]
         public string Logotipo { get; set; } = null!;
 
         [MinLength(1, ErrorMessage = "Informe ao menos um logradouro.")]

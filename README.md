@@ -116,7 +116,7 @@ git checkout main
 
 ### 3. Baixe o arquivo `appsettings.Secret.json`
 
-Acesse o [link](https://drive.google.com/file/d/1Mn1RB9P-NBkEz2Yv3nXnUV9ftDVgpkqi/view?usp=sharing) e coloque o arquivo `appsettings.Secret.json` na pasta do projeto juntamente com os demais `appsettings` já presentes. Lá está presente os dados de login do Admin Default que é gerado ao iniciar o projeto por não ter nenhum usuário cadastrado e facilitar a utilização do sistema.
+Acesse o [link](https://drive.google.com/file/d/1Mn1RB9P-NBkEz2Yv3nXnUV9ftDVgpkqi/view?usp=sharing), baixe o arquivo `appsettings.Secret.json` e salve na pasta do projeto juntamente com os demais `appsettings` já presentes. Lá está presente os dados de login do Admin Default que é gerado ao iniciar o projeto por não ter nenhum usuário cadastrado e facilitar a utilização do sistema.
 
 >Atenção: se esse arquivo não estiver presente, o projeto não irá compilar!
 
@@ -135,7 +135,13 @@ Para ambientes de produção, é importante revisar opções como autenticação
 ### 5. Execute as migrações e inicie o projeto
 
 ```bash
+# (Opcional) Restaure os pacotes, caso seja a primeira vez ou após alterações no .csproj
+dotnet restore
+
+# Aplique as migrations no banco
 dotnet ef database update
+
+# Inicie o projeto
 dotnet run
 ```
 
