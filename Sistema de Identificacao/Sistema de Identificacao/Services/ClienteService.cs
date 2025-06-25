@@ -66,13 +66,14 @@ namespace Sistema_de_Identificacao.Services
 
         public async Task<bool> Atualizar(ClienteUpdateDto dto)
         {
-            var cliente = await _context.Clientes.FindAsync(dto.Id);
+            var cliente = await _context.Clientes
+               .Include(c => c.Logradouros)
+               .FirstOrDefaultAsync(c => c.Id == dto.Id);
+
             if (cliente == null) 
                 return false;
 
-            // Verificar depois a atualização de logradouros....
-
-            bool existeEmail = await _context.Clientes.AnyAsync(c => c.Email == dto.Email);
+            bool existeEmail = await _context.Clientes.AnyAsync(c => c.Email == dto.Email && c.Id != dto.Id);
 
             if (existeEmail) 
                 throw new ArgumentException("Já existe um cliente cadastrado com este e-mail.");
@@ -80,6 +81,11 @@ namespace Sistema_de_Identificacao.Services
             cliente.Nome = dto.Nome;
             cliente.Email = dto.Email;
             cliente.Logotipo = dto.Logotipo;
+
+            //Remover os logradouros antigos e ficar apenas os que estão no JSON do Update
+            //O ideal seria manter os que não foram modificados e apenas remover e/ou adicionar os alterados(novos e excluídos)
+            _context.Logradouros.RemoveRange(cliente.Logradouros);
+
             cliente.Logradouros = dto.Logradouros.Select(l => new Logradouro
             {
                 Rua = l.Rua,
@@ -96,8 +102,11 @@ namespace Sistema_de_Identificacao.Services
 
         public async Task<bool> Remover(int id)
         {
-            var cliente = await _context.Clientes.FindAsync(id);
-            if(cliente == null) 
+            var cliente = await _context.Clientes
+              .Include(c => c.Logradouros)
+              .FirstOrDefaultAsync(c => c.Id == id);
+
+            if (cliente == null) 
                 return false;
 
             _context.Clientes.Remove(cliente);
