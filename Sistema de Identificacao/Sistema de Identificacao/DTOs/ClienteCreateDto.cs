@@ -1,15 +1,24 @@
 ﻿using Sistema_de_Identificacao.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace Sistema_de_Identificacao.DTOs
 {
     public class ClienteCreateDto
     {
-        public string Nome { get; set; }
+        [Required]
+        [StringLength(100)]
+        public string Nome { get; set; } = null!;
 
-        public string Email { get; set; }
+        [Required]
+        [StringLength(150)]
+        [EmailAddress(ErrorMessage = "Informe um e-mail válido.")]
+        public string Email { get; set; } = null!;
 
-        public string Logotipo { get; set; }
+        [Required]
+        [StringLength(500)]
+        public string Logotipo { get; set; } = null!;
 
-        public List<LogradouroClienteDto> Logradouros { get; set; } = new();
+        [MinLength(1, ErrorMessage = "Informe ao menos um logradouro.")]
+        public List<LogradouroClienteDto> Logradouros { get; set; } = [];
     }
 }

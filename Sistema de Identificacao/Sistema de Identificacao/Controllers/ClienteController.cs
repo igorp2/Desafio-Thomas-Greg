@@ -20,7 +20,8 @@ namespace Sistema_de_Identificacao.Controllers
         {
             var clientes = await _clienteService.ObterTodos();
 
-            if (clientes.Count == 0) return Ok("Nenhum cliente cadastrado!");
+            if (clientes.Count == 0) 
+                return Ok("Nenhum cliente cadastrado!");
 
             return Ok(clientes);
         }
@@ -30,7 +31,8 @@ namespace Sistema_de_Identificacao.Controllers
         {
             var cliente = await _clienteService.ObterPorId(id);
 
-            if (cliente == null) return NotFound("Cliente não encontrado!");
+            if (cliente == null) 
+                return NotFound("Cliente não encontrado!");
 
             return Ok(cliente);
         }

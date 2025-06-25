@@ -38,9 +38,11 @@ namespace Sistema_de_Identificacao.Services
         {
             bool existeEmail = await _context.Clientes.AnyAsync(c => c.Email == dto.Email);
 
-            if (existeEmail) throw new ArgumentException("Já existe um cliente cadastrado com este e-mail.");
-            
+            if (existeEmail) 
+                throw new ArgumentException("Já existe um cliente cadastrado com este e-mail.");
+
             //Aqui seria onde a imagem seria salva em algum servidor em nuvem, seria gerado e salvo a url de acesso
+            //Ex.: https://meuservidor.com/logo_cliente_X.png
 
             var cliente = new Cliente
             {
@@ -60,13 +62,15 @@ namespace Sistema_de_Identificacao.Services
         public async Task<bool> Atualizar(ClienteUpdateDto dto)
         {
             var cliente = await _context.Clientes.FindAsync(dto.Id);
-            if (cliente == null) return false;
+            if (cliente == null) 
+                return false;
 
             // Verificar depois a atualização de logradouros....
 
             bool existeEmail = await _context.Clientes.AnyAsync(c => c.Email == dto.Email);
 
-            if (existeEmail) throw new ArgumentException("Já existe um cliente cadastrado com este e-mail.");
+            if (existeEmail) 
+                throw new ArgumentException("Já existe um cliente cadastrado com este e-mail.");
 
             cliente.Nome = dto.Nome;
             cliente.Email = dto.Email;
@@ -83,7 +87,8 @@ namespace Sistema_de_Identificacao.Services
         public async Task<bool> Remover(int id)
         {
             var cliente = await _context.Clientes.FindAsync(id);
-            if(cliente == null) return false;
+            if(cliente == null) 
+                return false;
 
             _context.Clientes.Remove(cliente);
             await _context.SaveChangesAsync();

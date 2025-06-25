@@ -21,7 +21,8 @@ namespace Sistema_de_Identificacao.Controllers
         {
             var logradouros = await _logradouroService.ObterTodos();
 
-            if (logradouros.Count == 0) return Ok("Nenhum logradouro cadastrado!");
+            if (logradouros.Count == 0) 
+                return Ok("Nenhum logradouro cadastrado!");
 
             return Ok(logradouros);
         }
@@ -31,7 +32,8 @@ namespace Sistema_de_Identificacao.Controllers
         {
             var logradouro = await _logradouroService.ObterPorId(id);
 
-            if (logradouro == null) return NotFound("Logradouro não encontrado!");
+            if (logradouro == null) 
+                return NotFound("Logradouro não encontrado!");
             
             return Ok(logradouro);
         }

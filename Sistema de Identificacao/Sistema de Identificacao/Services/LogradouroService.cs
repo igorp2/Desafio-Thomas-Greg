@@ -32,7 +32,8 @@ namespace Sistema_de_Identificacao.Services
         public async Task Criar(LogradouroCreateDto dto)
         {
             bool existeCliente = await _context.Clientes.AnyAsync(c => c.Id == dto.ClienteId);
-            if (!existeCliente) throw new ArgumentException("Cliente não encontrado!");
+            if (!existeCliente) 
+                throw new ArgumentException("Cliente não encontrado!");
 
             var logradouro = new Logradouro
             {
@@ -47,7 +48,8 @@ namespace Sistema_de_Identificacao.Services
         public async Task<bool> Atualizar(LogradouroUpdateDto dto)
         {
             var logradouro = await _context.Logradouros.FindAsync(dto.Id); ;
-            if (logradouro == null) return false;
+            if (logradouro == null) 
+                return false;
 
             logradouro.Rua = dto.Rua;
             logradouro.ClienteId = dto.ClienteId;
@@ -59,7 +61,8 @@ namespace Sistema_de_Identificacao.Services
         public async Task<bool> Remover(int id)
         {
             var logradouro = await _context.Logradouros.FindAsync(id);
-            if (logradouro == null) return false;
+            if (logradouro == null) 
+                return false;
 
             _context.Logradouros.Remove(logradouro);
             await _context.SaveChangesAsync();
