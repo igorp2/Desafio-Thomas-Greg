@@ -57,9 +57,9 @@ namespace Sistema_de_Identificacao.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task<bool> Atualizar(int id, ClienteUpdateDto dto)
+        public async Task<bool> Atualizar(ClienteUpdateDto dto)
         {
-            var cliente = await _context.Clientes.FindAsync(id);
+            var cliente = await _context.Clientes.FindAsync(dto.Id);
             if (cliente == null) return false;
 
             // Verificar depois a atualização de logradouros....

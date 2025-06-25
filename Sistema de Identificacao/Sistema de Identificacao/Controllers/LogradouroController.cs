@@ -50,10 +50,10 @@ namespace Sistema_de_Identificacao.Controllers
             }
         }
 
-        [HttpPut("id")]
-        public async Task<IActionResult> Update(int id, [FromBody] LogradouroUpdateDto dto)
+        [HttpPut]
+        public async Task<IActionResult> Update(LogradouroUpdateDto logradouroDto)
         {
-            var atualizado = await _logradouroService.Atualizar(id, dto);
+            var atualizado = await _logradouroService.Atualizar(logradouroDto);
             return atualizado ? Ok("Logradouro atualizado com sucesso.") : NotFound("Logradouro não encontrado.");
         }
 

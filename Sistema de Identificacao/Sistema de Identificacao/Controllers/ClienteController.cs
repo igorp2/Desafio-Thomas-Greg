@@ -49,12 +49,12 @@ namespace Sistema_de_Identificacao.Controllers
             }
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] ClienteUpdateDto dto)
+        [HttpPut]
+        public async Task<IActionResult> Update(ClienteUpdateDto clienteDto)
         {
             try
             {
-                var atualizado = await _clienteService.Atualizar(id, dto);
+                var atualizado = await _clienteService.Atualizar(clienteDto);
                 return atualizado ? Ok("Cliente atualizado com sucesso.") : NotFound("Cliente não encontrado.");
             }
             catch (ArgumentException ex)

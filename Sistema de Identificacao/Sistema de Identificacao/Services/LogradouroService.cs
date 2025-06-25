@@ -44,9 +44,9 @@ namespace Sistema_de_Identificacao.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task<bool> Atualizar(int id, LogradouroUpdateDto dto)
+        public async Task<bool> Atualizar(LogradouroUpdateDto dto)
         {
-            var logradouro = await _context.Logradouros.FindAsync(id); ;
+            var logradouro = await _context.Logradouros.FindAsync(dto.Id); ;
             if (logradouro == null) return false;
 
             logradouro.Rua = dto.Rua;
