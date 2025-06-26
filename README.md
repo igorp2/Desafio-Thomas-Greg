@@ -97,6 +97,58 @@ Com isso:
  
 > Caso o sistema venha a demandar **consultas mais complexas, operações de alta performance**, o uso de procedures passa a ser uma excelente opção e pode ser facilmente integrado ao projeto.
 
+## Entidades do Sistema de Identificação
+
+### Cliente
+
+| Campo       | Tipo               |
+|-------------|--------------------|
+| Id          | `int`              | 
+| Nome        | `string`           | 
+| Email       | `string`           |
+| Logotipo    | `string`           | 
+| Logradouros | `List<Logradouro>` |
+
+**Relacionamentos:**
+- Um `Cliente` possui uma **lista de Logradouros** (relação 1:N com `Logradouro`).
+
+---
+
+### Logradouro
+
+| Campo     | Tipo     |
+|-----------|----------|
+| Id        | `int`    | 
+| Rua       | `string` |
+| Numero    | `string` | 
+| Bairro    | `string` | 
+| Cidade    | `string` | 
+| Estado    | `string` | 
+| Cep       | `string` | 
+| ClienteId | `int`    | 
+| Cliente   | `Cliente`| 
+
+**Relacionamentos:**
+- Cada `Logradouro` pertence a **um Cliente** (relação N:1 com `Cliente`).
+
+---
+
+## Usuário
+
+| Campo        | Tipo           |
+|--------------|----------------|
+| Id           | `int`          |
+| Nome         | `string`       |
+| Email        | `string`       |
+| PasswordHash | `string`       |
+| Cargo        | `CargoUsuario` |
+### Enum: `CargoUsuario`
+
+| Valor | Nome   |
+|-------|--------|
+| 0     | Comum  |
+| 1     | Admin  |
+
 ## Como Rodar o Projeto
 
 ### 1. Clone o repositório
