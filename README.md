@@ -149,7 +149,7 @@ dotnet run
 
 Após iniciar o projeto pelo CMD, acesse a URL http://localhost:5000/swagger/index.html para visualizar a documentação da API via Swagger. Caso rode o projeto pelo Visual Studio em https a URL será https://localhost:5001/swagger/index.html.
 
-Realize login via `/api/auth/login` e receba um token JWT.
+Realize login via `/api/Autenticacao/login` e receba um token JWT.
 
 Para testar a API via **Postman**, **Insomnia** ou qualquer cliente HTTP, lembre-se de adicionar o token JWT no cabeçalho das requisições:
 
