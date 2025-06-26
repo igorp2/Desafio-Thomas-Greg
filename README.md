@@ -103,7 +103,7 @@ Com isso:
 
 ```bash
 git clone https://github.com/igorp2/Desafio-Thomas-Greg.git
-cd '.\Sistema de Identificacao\'
+cd '.\Desafio-Thomas-Greg\Sistema de Identificacao\Sistema de Identificacao\'
 ```
 
 ### 2. Branch do projeto
