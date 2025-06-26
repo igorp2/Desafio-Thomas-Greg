@@ -12,7 +12,7 @@ namespace Sistema_de_Identificacao.Models
         public string Rua { get; set; } = null!;
 
         [Required]
-        [MaxLength(10)]
+        [MaxLength(20)]
         public string Numero { get; set; } = null!;
 
         [Required]

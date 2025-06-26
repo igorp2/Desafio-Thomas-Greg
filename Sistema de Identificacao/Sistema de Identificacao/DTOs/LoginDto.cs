@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Sistema_de_Identificacao.DTOs
 {
@@ -10,6 +11,7 @@ namespace Sistema_de_Identificacao.DTOs
         public string Email { get; set; } = null!;
 
         [Required]
+        [DefaultValue("Senha")]
         public string Senha { get; set; } = null!;
 
     }
