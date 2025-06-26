@@ -20,6 +20,7 @@ namespace Sistema_de_Identificacao.Services
         {
             var clientes = await _context.Clientes
                 .Include(c => c.Logradouros)
+                .AsNoTracking()
                 .ToListAsync();
 
             return clientes;
@@ -29,6 +30,7 @@ namespace Sistema_de_Identificacao.Services
         {
             var cliente = await _context.Clientes
                 .Include(c => c.Logradouros)
+                .AsNoTracking()
                 .FirstOrDefaultAsync(c => c.Id == id);
 
             return cliente;

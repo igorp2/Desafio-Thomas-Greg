@@ -18,13 +18,17 @@ namespace Sistema_de_Identificacao.Services
 
         public async Task<List<Logradouro>> ObterTodos()
         {
-            var logradouros = await _context.Logradouros.ToListAsync(); ;
+            var logradouros = await _context.Logradouros
+                .AsNoTracking()
+                .ToListAsync();
+
             return logradouros;
         }
 
         public async Task<Logradouro?> ObterPorId(int id)
         {
             var logradouro = await _context.Logradouros
+                .AsNoTracking()
                 .FirstOrDefaultAsync(l => l.Id == id);
 
             return logradouro;
@@ -38,6 +42,7 @@ namespace Sistema_de_Identificacao.Services
 
             var logradouros = await _context.Logradouros
                 .Where(l => l.ClienteId == clienteId)
+                .AsNoTracking()
                 .ToListAsync();
 
             return logradouros;

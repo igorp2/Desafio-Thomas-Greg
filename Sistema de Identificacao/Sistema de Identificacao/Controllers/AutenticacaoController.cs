@@ -48,7 +48,10 @@ namespace Sistema_de_Identificacao.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginDto dto)
         {
-            var user = await _context.Usuarios.FirstOrDefaultAsync(u => u.Email == dto.Email);
+            var user = await _context.Usuarios
+                .AsNoTracking()
+                .FirstOrDefaultAsync(u => u.Email == dto.Email);
+
             if (user == null || user.PasswordHash != GerarHash(dto.Senha))
                 return Unauthorized("Email ou senha inválidos.");
 
